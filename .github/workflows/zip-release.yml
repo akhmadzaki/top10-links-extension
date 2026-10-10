@@ -24,8 +24,8 @@ jobs:
           VERSION="${{ steps.get-version.outputs.VERSION }}"
           ARCHIVE_NAME="app-v${VERSION}.zip"
           
-          # Create the zip file, excluding README.md (and optionally workflow/git files)
-          zip -r "$ARCHIVE_NAME" . -x "README.md" ".git/*" ".github/*"
+          # Create the zip file, explicitly excluding the archive itself, README, and git files
+          zip -r "$ARCHIVE_NAME" . -x "$ARCHIVE_NAME" "README.md" ".git/*" ".github/*"
           
           # Verify contents of the zip
           unzip -l "$ARCHIVE_NAME"

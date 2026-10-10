@@ -18,37 +18,54 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
         const top10 = sortedEntries.slice(0, 10);
 
-        // 4. Build the HTML 3-column table
-        let html = `
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>URL</th>
-            <th>Visits</th>
-          </tr>
-        </thead>
-        <tbody>
-    `;
+        // 4. Build the 3-column table programmatically
+        const table = document.createElement('table');
+
+        // Create Header
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        ['#', 'URL', 'Visits'].forEach(text => {
+            const th = document.createElement('th');
+            th.textContent = text;
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // Create Body
+        const tbody = document.createElement('tbody');
 
         top10.forEach(([url, data], index) => {
             const visit_count = data.visit_count ?? 0;
+            const tr = document.createElement('tr');
 
-            html += `
-        <tr>
-          <td>${index + 1}</td>
-          <td><a href="${url}" target="_blank" title="${url}">${url}</a></td>
-          <td>${visit_count}</td>
-        </tr>
-      `;
+            // Index column
+            const tdIndex = document.createElement('td');
+            tdIndex.textContent = index + 1;
+            tr.appendChild(tdIndex);
+
+            // URL column with a safe anchor element
+            const tdUrl = document.createElement('td');
+            const a = document.createElement('a');
+            a.href = url;
+            a.textContent = url;
+            a.target = '_blank';
+            a.title = url;
+            tdUrl.appendChild(a);
+            tr.appendChild(tdUrl);
+
+            // Visits column
+            const tdVisits = document.createElement('td');
+            tdVisits.textContent = visit_count;
+            tr.appendChild(tdVisits);
+
+            tbody.appendChild(tr);
         });
 
-        html += `
-        </tbody>
-      </table>
-    `;
+        table.appendChild(tbody);
 
-        container.innerHTML = html;
+        // Clear the container and append the new table safely
+        container.replaceChildren(table);
 
     } catch (error) {
         console.error("Error reading storage:", error);

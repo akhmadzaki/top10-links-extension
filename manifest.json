@@ -16,7 +16,10 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "history-sld@956c21b9"
+      "id": "history-sld@956c21b9",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   }
 }
