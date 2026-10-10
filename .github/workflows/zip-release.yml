@@ -1,0 +1,37 @@
+name: Create Versioned Zip Archive
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-zip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract version from manifest.json
+        id: get-version
+        run: |
+          # Use jq to extract the version field safely
+          VERSION=$(jq -r '.version' manifest.json)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Extracted version: $VERSION"
+
+      - name: Generate Zip Archive
+        run: |
+          VERSION="${{ steps.get-version.outputs.VERSION }}"
+          ARCHIVE_NAME="app-v${VERSION}.zip"
+          
+          # Create the zip file, excluding README.md (and optionally workflow/git files)
+          zip -r "$ARCHIVE_NAME" . -x "README.md" ".git/*" ".github/*"
+          
+          # Verify contents of the zip
+          unzip -l "$ARCHIVE_NAME"
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-v${{ steps.get-version.outputs.VERSION }}
+          path: app-v*.zip

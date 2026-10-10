@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Top10 Links",
+  "version": "1.0.0",
+  "description": "Show top 10 visited links",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "history",
+    "storage"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "history-sld@956c21b9"
+    }
+  }
+}

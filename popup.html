@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        :root {
+            color-scheme: light dark;
+            --bg-color: #ffffff;
+            --text-color: #1c1c1e;
+            --alert-bg: #e5e5ea;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #2a2a2e;
+                --text-color: #f9f9fb;
+                --alert-bg: #3a3a3c;
+            }
+        }
+
+        body {
+            box-sizing: border-box;
+            width: max-content;
+            padding: 12px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: sans-serif;
+            text-align: center;
+            margin: 0;
+        }
+
+        h3 {
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--bg-color);
+            padding: 6px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--bg-color);
+        }
+
+        td:nth-child(1),
+        td:nth-child(3) {
+            text-align: left;
+            width: 40px;
+        }
+
+        td:nth-child(2) {
+            max-width: 240px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        a {
+            color: var(--text-color);
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Top Visited Links</h3>
+    <div id="table-container">Loading...</div>
+
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
