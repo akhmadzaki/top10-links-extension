@@ -18,7 +18,7 @@ Firefox extension to show top 10 visited links in your browser by visit count.
 
 ### Option 1: Install from Web Stores (Recommended)
 
-- [Firefox Add-ons](#)
+- [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/top10-links/)
 
 ### Option 2: Load Extension from file (Development)
 
